@@ -34,7 +34,7 @@ int main()
     printf("\b\b ");
 
     int Positive, Negative = 0;
-    int Odd , Summ = 0;
+    int Odd, Summ = 0;
     int Min, Max = List[0];
 
     for (int i = 0; i < Numbers; i++)
