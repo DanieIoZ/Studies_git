@@ -34,14 +34,14 @@ int main()
     printf("\b\b ");
 
     int Positive, Negative = 0;
-    int Even , Summ = 0;
+    int Odd , Summ = 0;
     int Min, Max = List[0];
 
     for (int i = 0; i < Numbers; i++)
     {
         Positive += List[i] > 0;
         Negative += List[i] < 0;
-        Even += List[i] & 1;
+        Odd += List[i] & 1;
         if (List[i] > Max)
             Max = List[i];
         else if (List[i] < Min)
@@ -54,10 +54,10 @@ int main()
     printf("\nPocet zapornych: %d", Negative);
     printf("\nProcento kladnych: %.2f", (float)100/Numbers * Positive);
     printf("\nProcento kladnych: %.2f", (float)100/Numbers * Negative);
-    printf("\nPocet sudych: %d", Numbers-Even);
-    printf("\nPocet lichych: %d", Even);    
-    printf("\nProcento sudych: %.2f", (float)100/Numbers * (Numbers-Even));
-    printf("\nProcento lichych: %.2f", (float)100/Numbers * Even);
+    printf("\nPocet sudych: %d", Numbers-Odd);
+    printf("\nPocet lichych: %d", Odd);    
+    printf("\nProcento sudych: %.2f", (float)100/Numbers * (Numbers-Odd));
+    printf("\nProcento lichych: %.2f", (float)100/Numbers * Odd);
     printf("\nPrumer: %.2f", (float)Summ/Numbers);
     printf("\nMaximum: %d", Max);
     printf("\nMinimum: %d", Min);
