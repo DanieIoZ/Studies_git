@@ -20,8 +20,8 @@ import player
 
 if __name__ == "__main__":
     payoff = (((4,4),(1,6)),((6,1),(2,2)))
-    playerA = player.MyPlayer(payoff)
-    playerB = player.MyCleverPlayer(payoff)
+    playerA = player.MyPlayer2(payoff)
+    playerB = player.MyPlayer(payoff)
     number_of_iterations = 20
 
     my_game = Game.Game(playerA, playerB, payoff, number_of_iterations)
