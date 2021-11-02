@@ -2,6 +2,6 @@
 
 int main(void)
 {
-    printf("Hello PRP! \n");
+    printf("Hello PRP!\n");
     return 0; 
 }

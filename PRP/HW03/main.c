@@ -1,9 +1,8 @@
 #include <stdio.h>
 
-#define height_to_fence_diff 3
+#define height_to_fence_diff 1
 #define lower_range 3
 #define upper_range 69
-
 
 //Prints a line, made by array of chars and count of each of them
 //{ {3, 'X' }, { 2, 'Y' }, { 3, 'X' } } will print "XXXYYXXX"
@@ -13,7 +12,7 @@ void fill_by_char(int data[][2], int array_elements, int new_line)
     for (int i = 0; i  < array_elements; i++)
         for (int j = 0; j < data[i][0]; j++)
         {
-            printf("%2c", data[i][1]);
+            printf("%c", data[i][1]);
         }
     if (new_line)
         printf("\n");
@@ -21,12 +20,12 @@ void fill_by_char(int data[][2], int array_elements, int new_line)
 
 void fill_house(int width, int odd, int new_line)
 {
-    printf("%2c", 'X');
+    printf("%c", 'X');
     for (int i = 0; i < width-2; i++)
     {
-        printf("%2c", (i+odd)&1 ? '*' : 'o');
+        printf("%c", (i+odd)&1 ? '*' : 'o');
     }
-    printf("%2c", 'X');
+    printf("%c", 'X');
     if (new_line)
         printf("\n");
 }
@@ -36,9 +35,9 @@ void build_fence(int size, int inside_part)
     for (int i = size; i > 0; i--)
     {
         if (inside_part)
-            printf("%2c", i&1 ? '|' : ' ');
+            printf("%c", i&1 ? '|' : ' ');
         else
-            printf("%2c", i&1 ? '|' : '-');
+            printf("%c", i&1 ? '|' : '-');
     }
     printf("\n");
 }
@@ -51,28 +50,36 @@ int in_range(int range[], int num)
 
 int main()
 {
-    int width, height, fence = 0;
-    printf("Write WIDTH, HEIGHT and FENCE SIZE of the house: ");
-    
-    //Scanning vars and handling errors
-    if (scanf("%d %d %d", &width, &height, &fence) < 3)
+    int width = 0;
+    int height = 0;
+    int fence = 0;
+
+    int scan_num = scanf("%d %d", &width, &height);
+    int scan_required = 2;
+    if (width == height)
     {
-        printf("Error: Chybny vstup!");
+        scan_num += scanf("%d", &fence);
+        scan_required++;
+    }
+    //Scanning vars and handling errors
+    if (scan_num < scan_required)
+    {
+        fprintf(stderr, "Error: Chybny vstup!\n");
         return 100;
     }
     if (!(in_range((int [2]){lower_range, upper_range}, width) & in_range((int [2]){lower_range, upper_range}, height)))
     {
-        printf("Error: Vstup mimo interval!");
+        fprintf(stderr, "Error: Vstup mimo interval!\n");
         return 101;
     }
     if (!(width&1))
     {
-        printf("Error: Sirka neni liche cislo!");
+        fprintf(stderr, "Error: Sirka neni liche cislo!\n");
         return 102;
     }
-    if (fence + height_to_fence_diff > height || fence < 1)
+    if ((scan_required == 3) && ((fence + height_to_fence_diff > height) || (fence < 1)))
     {
-        printf("Error: Neplatna velikost plotu!");
+        fprintf(stderr, "Error: Neplatna velikost plotu!\n");
         return 103;
     }
    
@@ -82,26 +89,36 @@ int main()
 
     for (int i = 1; i < half_width; i++)
     {
-        fill_by_char((int [][2]) { { half_width - i, ' ' }, { 1, 'X' }, { i * 2 - 1, ' ' }, { 1, 'X' }, { half_width - i, ' ' }}, 5, 1);
+        fill_by_char((int [][2]) { { half_width - i, ' ' }, { 1, 'X' }, { i * 2 - 1, ' ' }, { 1, 'X' }}, 4, 1);
     }
     fill_by_char((int [][2]) {{ width, 'X' }}, 1, 1);
     //building a house inside and a fence
-    for (int i = 0; i < height - 2; i++)
-    {
-        int fence_started = (height - i - 2) < fence;
-        fill_house(width, i%2, !fence_started);
-
-        //In the task was written, that the fence must be "much smaller" than the height. So as a "much smaller" i took just 3 blocks
-        if (fence_started)
+    if (scan_required == 3)
+        for (int i = 0; i < height - 2; i++)
         {
-            if (height - i - 1 == fence)
-                build_fence(fence, 0);
-            else
-                build_fence(fence, 1);
+            
+            int fence_started = (height - i - 2) < fence;
+            fill_house(width, i%2, !fence_started);
 
+            //In the task was written, that the fence must be "much smaller" than the height. So as a "much smaller" i took just 3 blocks
+            if (fence_started)
+            {
+                if (height - i - 1 == fence)
+                    build_fence(fence, 0);
+                else
+                    build_fence(fence, 1);
+
+            }
         }
-    }
-    fill_by_char((int [][2]) {{ width, 'X' }}, 1, 0);
-    build_fence(fence, 0);
+    else
+        for (int i = 0; i < height - 2; i++)
+        {
+            fill_by_char((int [][2]) { { 1, 'X' },{ width-2, ' ' }, { 1, 'X' }}, 3, 1);
+        }
+
+    fill_by_char((int [][2]) {{ width, 'X' }}, 1, scan_num == 3 ? 0 : 1);
+    if (scan_num == 3)
+      build_fence(fence, 0);
+
     return 0;
 }
