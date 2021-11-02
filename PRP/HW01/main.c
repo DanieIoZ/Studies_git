@@ -44,7 +44,6 @@ char * DecToHex(int Num, int NumSize)
 int main()
 {
     int Range_declare[2] = { -10000, 10000 };
-    printf("Enter two variables in the range of [-10000,10000]\n");
     int a,b = 666;
     scanf("%d %d", &a, &b);
 
@@ -60,7 +59,7 @@ int main()
     printf("Rozdil: %d - %d = %d\n", a, b, a-b);
     printf("Soucin: %d * %d = %d\n", a, b, a*b);
     if (b == 0)
-        printf("Podil: nedefinovany vysledek\n");
+        printf("Nedefinovany vysledek!\n");
     else
         printf("Podil: %d / %d = %d\n", a, b, a/b);
     printf("Prumer: %.1f\n", (float)(a + b) / 2);
