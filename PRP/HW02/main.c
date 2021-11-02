@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define Array_Len 80
+#define Array_Len 100
 #define Range_declare_max 10000
 #define Range_declare_min -10000
 
@@ -11,7 +11,9 @@ int InRange(int Range_min, int Range_max, int Number)
 
 int main()
 {
-    int Numbers = 0;
+    printf("Enter variables in the range of [-10000,10000]\n");
+
+    int Numbers;
     int List[Array_Len];
 
     while (scanf("%d",&List[Numbers]) > 0)
@@ -23,45 +25,42 @@ int main()
     {
         if (!InRange(Range_declare_min, Range_declare_max, List[i])) 
         {
-            printf("\nError: Vstup je mimo interval!\n");
+            //Using \b to remove last comma
+            printf("\b\b \nError:  Vstup je mimo interval!");
             return 100; 
         }
-        if (i != 0)
-            printf(", ");
-        printf("%d", List[i]);
-        
+        printf("%d, ", List[i]);
     }
+    printf("\b\b ");
 
-    int Positive = 0;
-    int Negative = 0;
-    int Even = 0; 
-    int Summ = 0;
-    int Min = List[0];
-    int Max = List[0];
+    int Positive, Negative = 0;
+    int Odd, Summ = 0;
+    int Min, Max = List[0];
 
     for (int i = 0; i < Numbers; i++)
     {
         Positive += List[i] > 0;
         Negative += List[i] < 0;
-        Even += List[i] & 1;
+        Odd += List[i] & 1;
         if (List[i] > Max)
             Max = List[i];
         else if (List[i] < Min)
             Min = List[i];
         Summ += List[i];
     }
-    float Percents = 100/(float)Numbers;
+
     printf("\nPocet cisel: %d", Numbers);
     printf("\nPocet kladnych: %d", Positive);
     printf("\nPocet zapornych: %d", Negative);
-    printf("\nProcento kladnych: %.2f", Percents * Positive);
-    printf("\nProcento zapornych: %.2f", Percents * Negative);
-    printf("\nPocet sudych: %d", Numbers-Even);
-    printf("\nPocet lichych: %d", Even);    
-    printf("\nProcento sudych: %.2f", Percents * (Numbers-Even));
-    printf("\nProcento lichych: %.2f", Percents * Even);
+    printf("\nProcento kladnych: %.2f", (float)100/Numbers * Positive);
+    printf("\nProcento kladnych: %.2f", (float)100/Numbers * Negative);
+    printf("\nPocet sudych: %d", Numbers-Odd);
+    printf("\nPocet lichych: %d", Odd);    
+    printf("\nProcento sudych: %.2f", (float)100/Numbers * (Numbers-Odd));
+    printf("\nProcento lichych: %.2f", (float)100/Numbers * Odd);
     printf("\nPrumer: %.2f", (float)Summ/Numbers);
     printf("\nMaximum: %d", Max);
-    printf("\nMinimum: %d\n", Min);
+    printf("\nMinimum: %d", Min);
+    
     return 0;
 }
