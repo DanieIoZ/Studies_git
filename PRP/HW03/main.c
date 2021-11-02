@@ -4,7 +4,6 @@
 #define lower_range 3
 #define upper_range 69
 
-
 //Prints a line, made by array of chars and count of each of them
 //{ {3, 'X' }, { 2, 'Y' }, { 3, 'X' } } will print "XXXYYXXX"
 //var array_elements is used, because sizeof() function was returning me something wrong, so it's used to get a length of first dimension in this 2D array
@@ -48,14 +47,11 @@ int in_range(int range[], int num)
     return (range[0] <= num && num <= range[1]);         
 }   
 
-
 int main()
 {
     int width, height, fence = 0;
-    printf("Write WIDTH, HEIGHT and FENCE SIZE of the house: ");
-    
     //Scanning vars and handling errors
-    if (scanf("%d %d %d", &width, &height, &fence) < 3)
+    if (scanf("%d %d %d", &width, &height, &fence) < 2)
     {
         printf("Error: Chybny vstup!");
         return 100;
@@ -70,7 +66,7 @@ int main()
         printf("Error: Sirka neni liche cislo!");
         return 102;
     }
-    if (fence + height_to_fence_diff > height || fence < 1)
+    if (fence + height_to_fence_diff > height)
     {
         printf("Error: Neplatna velikost plotu!");
         return 103;
@@ -98,7 +94,6 @@ int main()
                 build_fence(fence, 0);
             else
                 build_fence(fence, 1);
-
         }
     }
     fill_by_char((int [][2]) {{ width, 'X' }}, 1, 0);
