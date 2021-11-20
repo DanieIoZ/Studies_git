@@ -56,6 +56,28 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint8_t hello[]="HELLO :)\n\0";
+uint8_t error[]="input not valid :(\n\0";
+uint8_t in_message[5] = "xxxx\0";
+uint8_t enter[]="\n";
+
+uint8_t led_off[]="led0\0";
+uint8_t led_on[]="led1\0";
+uint8_t led_toggle[]="togg\0";
+uint8_t led_blink[]="blnk\0";
+/*
+I HAVE A PROBLEM WITH CONNECTING A BOARD TO MY PC, WHICH I'M STILL TRYING TO SOLVE. SO I DIDN'T HAVE A POSSIBILITY TO TEST BLINKING. BUT OTHER COMMANDS MUST WORK.
+
+
+COMMANDS:
+
+led0 = switching led off
+led1 = switching led on
+togg = toggle led on/off
+blnk = blinking
+
+
+*/
 
 /* USER CODE END 0 */
 
@@ -92,19 +114,65 @@ int main(void)
   /* USER CODE BEGIN 2 */
   // HAL_UART_Receive_DMA(&huart2,in_message,11);
 
+  HAL_UART_Transmit(&huart2, hello, sizeof(hello),10);
+//  while (huart2.gState == HAL_UART_STATE_BUSY_TX) {}
 
 	  HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_RESET);
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
+  int blinking = 0;
 
   while (1)
   {
-	  HAL_UART_Receive(&huart2, in_message, sizeof(in_message)-1,3600000);
-			 
-       
-       HAL_UART_Transmit(&huart2, in_message,  sizeof(in_message),10);
+	    HAL_UART_Receive(&huart2, in_message, sizeof(in_message)-1,360000);
+
+			HAL_UART_Transmit(&huart2, in_message,  sizeof(in_message),10);
+			HAL_UART_Transmit(&huart2, enter, sizeof(enter),10);
+      HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+      /*
+       ALT1 START
+       I can't test this code on my board, because i have a problem with connecting it to my PC, so if i understand correctly, HAL_UART_Receive after 360k microseconds must return timeout value (but i don't know if it must return something to "in_message") and code must continue. 
+       So if "blnk" has been sent, and in_message = "", or probably "xxxx" or some timeout value, it must do TogglePin  
+      */
+      if (blinking && strcmp(in_message, "\0")==0)
+      {
+          HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_5);
+          HAL_Delay(100);
+      }
+      
+      if (strcmp(in_message, "\0") != 0)
+        if (strcmp(in_message, led_blink)==0)
+          blinking = 1;
+        else
+        {
+          if (strcmp(in_message,led_on)==0)
+            HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_SET);
+          else if (strcmp(in_message, led_off)==0)
+            HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_RESET);
+          else if (strcmp(in_message, led_toggle)==0)
+            HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_5);
+          else
+            HAL_UART_Transmit(&huart2, error, sizeof(error),10);
+          blinking = 0;
+        }
+      // ALT1 STOP
+
+      /*
+        ALT2 START
+          This code must work without blinking, if blinking in ALT1 doesn't work..                 <------------------------------------
+
+          if (strcmp(in_message,led_on)==0)
+			      HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_SET);
+			    else if (strcmp(in_message, led_off)==0)
+			      HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_RESET);
+          else if (strcmp(in_message, led_toggle)==0)
+            HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_5);
+          else
+			      HAL_UART_Transmit(&huart2, error, sizeof(error),10);
+
+        ALT2 STOP
+      */
 
 //	  	 }
 
