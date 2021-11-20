@@ -4,6 +4,10 @@
 
 #define BASE_LENGTH 100
 
+#define MAX_STRING_LENGTH 50001
+
+#define MAX_DIST_MATRIX_SIZE 500
+
 #define ERR_INVALID_INPUT -1
 
 #define STRING_COUNT 2
@@ -25,6 +29,11 @@ int get_min(int int1, int int2, int int3)
 
 int leven_dist(int length_str1, int length_str2, char * str1, char * str2)
 {
+    if (length_str1 > MAX_STRING_LENGTH)
+        length_str1 = MAX_STRING_LENGTH;
+    if (length_str2 > MAX_STRING_LENGTH)
+        length_str2 = MAX_STRING_LENGTH;
+
     int dist[length_str1+1][length_str2+1];
     
     for (int i = 0; i <= length_str1; i++)
@@ -81,15 +90,14 @@ void get_smallest_distance(char * str_ciph, char * str_orig, int len_ciph, int l
     strcpy(str_result, str_ciph);
     for (size_t i = 1; i < 52; i++)
     {
-        shift_string(str_ciph, 1);
-        int new_dist = leven_dist(len_ciph, len_orig, str_ciph, str_orig);
+        shift_string(str_result, 1);
+        int new_dist = leven_dist(len_ciph, len_orig, str_result, str_orig);
         if (new_dist < min_dist)
         {
             min_dist = new_dist;
-            strcpy(str_result, str_ciph);
+            strcpy(str_ciph, str_result);
         }
     }
-    strcpy(str_ciph, str_result);
 }
 
 void free_all(char * str1, char * str2)
@@ -105,8 +113,9 @@ int main(int argc, char * argv[])
 
     for (size_t i = 0; i < STRING_COUNT; i++)
     {
-        strings[i] = (char *) malloc(BASE_LENGTH);
+        strings[i] = malloc(BASE_LENGTH + 1);
         length[i] = 0;
+
         int max_length = BASE_LENGTH;
         while ((strings[i][length[i]] = getchar()) != '\n')
         {
@@ -118,11 +127,12 @@ int main(int argc, char * argv[])
             length[i]++;
             if (length[i] == max_length)
             {
-                max_length += BASE_LENGTH;
-                strings[i] = (char *) realloc(strings[i], max_length);
+                max_length *= 2;
+                strings[i] = max_length >= MAX_STRING_LENGTH ? (char *)realloc(strings[i], MAX_STRING_LENGTH) : (char *)realloc(strings[i], max_length + 1);
             }
         }
-        strings[i][length[i]] = '\0';
+        if (length[i] >= 0)
+            strings[i][length[i]] = '\0';
     }
 
     int ERR_INV_INPUT = length[0] == ERR_INVALID_INPUT || length[1] == ERR_INVALID_INPUT;
