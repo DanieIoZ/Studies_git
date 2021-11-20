@@ -100,6 +100,39 @@ void get_smallest_distance(char * str_ciph, char * str_orig, int len_ciph, int l
     }
 }
 
+int compare(char * str_ciph, char * str_orig)
+{
+    int i = 0;
+    int diff = 0;
+    while (str_ciph[i] != '\0')
+    {
+        if (str_ciph[i] != str_orig[i])
+            diff++;
+        i++;
+    }  
+    return diff;
+}
+
+void decrypt(char * str_ciph, char * str_orig, int length)
+{
+    char str_result[length];
+    strcpy(str_result, str_ciph);
+    
+    int min_diff = compare(str_result, str_orig);
+    for (size_t i = 1; i < 52; i++)
+    {
+        shift_string(str_result, 1);      
+        int diff = compare(str_result, str_orig);
+        if (min_diff > diff)
+        {
+            min_diff = diff;
+            strcpy(str_ciph, str_result);
+        }
+    }
+    
+    
+}
+
 void free_all(char * str1, char * str2)
 {
     free(str1);
@@ -150,7 +183,15 @@ int main(int argc, char * argv[])
         return 101;
         
     }
-    get_smallest_distance(strings[0], strings[1], length[0], length[1]);
+    if (argc > 1)
+    {
+        get_smallest_distance(strings[0], strings[1], length[0], length[1]);
+    }
+    else
+    {
+        decrypt(strings[0], strings[1], length[0]);
+    }
+
     
     printf("%s\n", strings[0]);
     free_all(strings[0], strings[1]);
