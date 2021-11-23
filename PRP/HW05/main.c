@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define BASE_LENGTH 100
+#define BASE_LENGTH 500
 
 #define MAX_STRING_LENGTH 50001
 
-#define MAX_DIST_MATRIX_SIZE 500
+#define MAX_DIST_MATRIX_SIZE 10
 
 #define ERR_INVALID_INPUT -1
 
@@ -29,18 +29,14 @@ int get_min(int int1, int int2, int int3)
 
 int leven_dist(int length_str1, int length_str2, char * str1, char * str2)
 {
-    if (length_str1 > MAX_STRING_LENGTH)
-        length_str1 = MAX_STRING_LENGTH;
-    if (length_str2 > MAX_STRING_LENGTH)
-        length_str2 = MAX_STRING_LENGTH;
+    int * dist[length_str1 + 1];
 
-    int dist[length_str1+1][length_str2+1];
-    
     for (int i = 0; i <= length_str1; i++)
     {
+        dist[i] = (int *)malloc((length_str2+1) * sizeof(int));
         dist[i][0] = i;
     }
-    
+
     for (int i = 0; i <= length_str2; i++)
     {
         dist[0][i] = i;
@@ -59,8 +55,14 @@ int leven_dist(int length_str1, int length_str2, char * str1, char * str2)
             dist[i][j] = get_min(dist[i-1][j] + 1, dist[i][j-1] + 1, dist[i-1][j-1] + sub_cost);
         }
     }
+    int result = dist[length_str1][length_str2];
+    for (size_t i = 0; i < length_str1 + 1; i++)
+    {
+        free(dist[i]);
+    }
     
-    return dist[length_str1][length_str2];
+
+    return result;
 }
 
 
@@ -86,7 +88,7 @@ void shift_string(char * str, int shift)
 void get_smallest_distance(char * str_ciph, char * str_orig, int len_ciph, int len_orig)
 {
     int min_dist = leven_dist(len_ciph, len_orig, str_ciph, str_orig);
-    char str_result[len_ciph];
+    char * str_result = (char *) malloc(len_ciph+1);
     strcpy(str_result, str_ciph);
     for (size_t i = 1; i < 52; i++)
     {
@@ -98,6 +100,7 @@ void get_smallest_distance(char * str_ciph, char * str_orig, int len_ciph, int l
             strcpy(str_ciph, str_result);
         }
     }
+    free(str_result);
 }
 
 int compare(char * str_ciph, char * str_orig)
@@ -115,13 +118,13 @@ int compare(char * str_ciph, char * str_orig)
 
 void decrypt(char * str_ciph, char * str_orig, int length)
 {
-    char str_result[length];
+    char * str_result = (char *) malloc(length+1);
     strcpy(str_result, str_ciph);
     
     int min_diff = compare(str_result, str_orig);
     for (size_t i = 1; i < 52; i++)
     {
-        shift_string(str_result, 1);      
+        shift_string(str_result, 1);    
         int diff = compare(str_result, str_orig);
         if (min_diff > diff)
         {
@@ -129,8 +132,7 @@ void decrypt(char * str_ciph, char * str_orig, int length)
             strcpy(str_ciph, str_result);
         }
     }
-    
-    
+    free(str_result);
 }
 
 void free_all(char * str1, char * str2)
@@ -166,8 +168,8 @@ int main(int argc, char * argv[])
         }
         if (length[i] >= 0)
             strings[i][length[i]] = '\0';
+        strings[i] = (char *) realloc(strings[i], length[i] + 1);
     }
-
     int ERR_INV_INPUT = length[0] == ERR_INVALID_INPUT || length[1] == ERR_INVALID_INPUT;
     if (ERR_INV_INPUT)
     {
@@ -191,9 +193,13 @@ int main(int argc, char * argv[])
     {
         decrypt(strings[0], strings[1], length[0]);
     }
-
-    
-    printf("%s\n", strings[0]);
+    int i = 0;
+    while (strings[0][i] != '\0')
+    {
+        printf("%c", strings[0][i]);
+        i++;
+    }
+    printf("\n");
     free_all(strings[0], strings[1]);
     return 0;
 }
