@@ -3,7 +3,7 @@
 
 #define MAX_OPERATIONS 50
 
-typedef struct 
+typedef struct matrix
 {
     int ** data;
     int size[2];
@@ -25,17 +25,17 @@ void mt_print(matrix * mat)
 
 matrix * mt_read()
 {
-    matrix * mat = malloc(sizeof(matrix));
+    matrix * mat = malloc(sizeof(struct matrix));
     if (scanf("%d %d", &mat->size[0], &mat->size[1]) < 2 )
     {
         fprintf(stderr, "Error: Chybny vstup!\n");
         exit(100);
     }
 
-    mat->data = malloc(mat->size[0]);
+    mat->data = malloc(mat->size[0] * sizeof(int*));
     for (size_t i = 0; i < mat->size[0]; i++)
     {
-        mat->data[i] = malloc(mat->size[1]);
+        mat->data[i] = malloc(mat->size[1] * sizeof(int));
         for (size_t j = 0; j < mat->size[1]; j++)
         {
             if (scanf("%d", &mat->data[i][j]) < 1)
@@ -152,7 +152,7 @@ int main()
     int scanning = 1;
     while (scanning)
     {
-        if (scanf("\n%c", &operations[last]) == EOF | operations[last] == '\n')
+        if (scanf("\n%c", &operations[last]) == EOF || operations[last] == '\n')
         {
             scanning = 0;
         }
@@ -196,5 +196,9 @@ int main()
     printf("%d %d\n", mats[0]->size[0], mats[0]->size[1]);
     mt_print(mats[0]);
     
-    
+    for (size_t i = 0; i <= last; i++)
+    {
+        mt_free(mats[i]);
+    }
+    free(mats);
 }
