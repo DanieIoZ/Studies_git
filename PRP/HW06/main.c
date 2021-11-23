@@ -14,9 +14,10 @@ void mt_print(matrix * mat)
 {
     for (size_t i = 0; i < mat->size[0]; i++)
     {
-        for (size_t j = 0; j < mat->size[1]; j++)
+        printf("%d", mat->data[i][0]);
+        for (size_t j = 1; j < mat->size[1]; j++)
         {
-            printf("%d ", mat->data[i][j]);
+            printf(" %d", mat->data[i][j]);
         }
         printf("\n");
     }
@@ -50,15 +51,15 @@ matrix * mt_read()
 
 matrix * mt_create(int rows, int cols)
 {
-    matrix * mat = malloc(sizeof(matrix));
+    matrix * mat = malloc(sizeof(struct matrix));
     
     mat->size[0] = rows;
     mat->size[1] = cols;
 
-    mat->data = malloc(mat->size[0]);
+    mat->data = malloc(mat->size[0] * sizeof(int*));
     for (size_t i = 0; i < mat->size[0]; i++)
     {
-        mat->data[i] = malloc(mat->size[1]);
+        mat->data[i] = malloc(mat->size[1] * sizeof(int));
     }
     return mat;
 }
