@@ -145,6 +145,10 @@ void mt_mul(matrix * mt_destination, matrix * mt_multiplier)
 
 int main()
 {
+    matrix * mt = mt_create(10, 10);
+    mt_free(mt);
+    return 0;
+
     matrix ** mats = malloc(sizeof(matrix *));
     char operations[MAX_OPERATIONS];
 
