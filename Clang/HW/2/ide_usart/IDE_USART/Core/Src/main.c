@@ -129,23 +129,14 @@ int main(void)
 
 			HAL_UART_Transmit(&huart2, in_message,  sizeof(in_message),10);
 			HAL_UART_Transmit(&huart2, enter, sizeof(enter),10);
-      HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-      /*
-       ALT1 START
-       I can't test this code on my board, because i have a problem with connecting it to my PC, so if i understand correctly, HAL_UART_Receive after 360k microseconds must return timeout value (but i don't know if it must return something to "in_message") and code must continue. 
-       So if "blnk" has been sent, and in_message = "", or probably "xxxx" or some timeout value, it must do TogglePin  
-      */
+
       if (blinking && strcmp(in_message, "\0")==0)
       {
           HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_5);
           HAL_Delay(100);
       }
       
-      if (strcmp(in_message, "\0") != 0)
-        if (strcmp(in_message, led_blink)==0)
-          blinking = 1;
-        else
-        {
+
           if (strcmp(in_message,led_on)==0)
             HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_SET);
           else if (strcmp(in_message, led_off)==0)
@@ -154,8 +145,6 @@ int main(void)
             HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_5);
           else
             HAL_UART_Transmit(&huart2, error, sizeof(error),10);
-          blinking = 0;
-        }
       // ALT1 STOP
 
       /*

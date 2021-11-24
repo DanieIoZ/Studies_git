@@ -26,7 +26,7 @@ void mt_print(matrix * mat)
 
 matrix * mt_read()
 {
-    matrix * mat = malloc(sizeof(struct matrix));
+    matrix * mat = (matrix *)malloc(sizeof(struct matrix));
     if (scanf("%d %d", &mat->size[0], &mat->size[1]) < 2 )
     {
         fprintf(stderr, "Error: Chybny vstup!\n");
@@ -145,6 +145,7 @@ void mt_mul(matrix * mt_destination, matrix * mt_multiplier)
 
 int main()
 {
+
     matrix ** mats = malloc(sizeof(matrix *));
     char operations[MAX_OPERATIONS];
 
