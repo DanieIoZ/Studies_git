@@ -184,6 +184,7 @@ int main()
 {
     mats = malloc(sizeof(matrix *));
     last = 0;
+
     char operations[MAX_OPERATIONS];
 
     mt_read(&mats[last]);
