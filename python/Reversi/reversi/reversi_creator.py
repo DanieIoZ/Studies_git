@@ -1,4 +1,5 @@
 import random_player
+import player
 #import greedy_player
 #import alphabeta_player
 #import heuristic_player
@@ -214,7 +215,7 @@ class ReversiCreator(object):
 
 if __name__ == "__main__": 
     (choices,args) = getopt.getopt(sys.argv[1:],"")
-    players_dict = {'random':random_player.MyPlayer}
+    players_dict = {'random':random_player.MyPlayer, 'player': player.MyPlayer}
     #players_dict = {'random':random_player.MyPlayer,'greedy':greedy_player.MyPlayer,'alphabeta':alphabeta_player.MyPlayer,'heuristic':heuristic_player.MyPlayer}
     
     for arg in args:
@@ -230,3 +231,12 @@ if __name__ == "__main__":
 
     game = ReversiCreator(players_dict)
     game.gui.root.mainloop()
+
+
+
+
+    #
+    #    r vs player :::::::::::::: 7 : 30
+    #    r vs playerzzzz :::::::::: 8 : 31
+    #    player vs playerzzzz ::::: 33 : 40  28:40
+    #
