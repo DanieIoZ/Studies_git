@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_LENGTH 100
+#define MAX_LENGTH 5000
 
-#define COLOR   "\033[1;31m"
-#define RESET "\033[0m"
+#define COLOR   "\033[01;31m\033[K"
+#define RESET "\033[m\033[K"
 
 int str_equal(char * str1, char * str2)
 {
@@ -22,29 +22,34 @@ int str_equal(char * str1, char * str2)
 
 int analyze_line(char str[], char * pattern, int opt_e, int opt_color)
 {
-    int starts[20];
-    int ends[20];
+    int starts[MAX_LENGTH];
+    int ends[MAX_LENGTH];
     int curr_startend = 0;
 
     int contains = 0;
 
-
     int curr_char = 0;
+    int pt_current = 0;
+    
+    int E_num = 0;
 
-    int pt_length = 0;
-    while (str[curr_char+1] != '\0')
+    while (str[curr_char+1] != '\n' && str[curr_char+1] != '\0')
     {
         curr_char++;
     }
-    while (pattern[pt_length+1] != '\0')
+    while (pattern[pt_current+1] != '\n' && pattern[pt_current+1] != '\0')
     {
-        pt_length++;
+        if (pattern[pt_current] == '?' || pattern[pt_current] == '*' || pattern[pt_current] == '+')
+            E_num++;
+        if (E_num > 1)
+            return 0;
+        pt_current++;
     }
     int str_length = curr_char;
-    int pt_current = pt_length;
-    while (curr_char >= 0)
+    int pt_length = pt_current;
+    while (curr_char > -1)
     {
-        if (str[curr_char] == pattern[pt_current])
+        if ((curr_char >= 0) && (pt_current >= 0) &&  str[curr_char] == pattern[pt_current])
         {
             if (!contains)
                 ends[curr_startend] = curr_char+1;
@@ -54,28 +59,46 @@ int analyze_line(char str[], char * pattern, int opt_e, int opt_color)
         }
         else
         {
-            if (opt_e)
+            if (opt_e && pt_current > 0)
             {
                 if (pattern[pt_current] == '?')
                 {
-                    if (str[curr_char] == pattern[pt_current-1])
+                    pt_current--;
+                    if (str[curr_char] == pattern[pt_current])
                     {
+                        if (!contains) 
+                        {
+                            contains = 1;
+                            ends[curr_startend] = curr_char+1;
+                        }
                         curr_char--;
                     }
-                    pt_current -= 2;
+                    pt_current--;
                 }
                 else if (pattern[pt_current] == '*')
                 {
-                    while (str[curr_char] == pattern[pt_current-1])
+                  if ((str[curr_char] == pattern[pt_current-1]) && !contains)
+                  {
+                        ends[curr_startend] = curr_char+1;
+                      contains = 1;
+                  }
+                    while ((curr_char >= 0) && (pt_current - 1 >= 0) && (str[curr_char] == pattern[pt_current-1]))
                     {
                         curr_char--;
+
                     }
                     pt_current -= 2;
+
                 }
                 else if (pattern[pt_current] == '+')
                 {
                     if (str[curr_char] == pattern[pt_current-1])
                     {
+                        if (!contains)
+                        {
+                            ends[curr_startend] = curr_char+1;
+                            contains = 1;
+                        }
                         while (str[curr_char] == pattern[pt_current-1])
                         {
                             curr_char--;
@@ -84,24 +107,39 @@ int analyze_line(char str[], char * pattern, int opt_e, int opt_color)
                     }
                     else
                     {
+                        
                         pt_current--;
                     }
+
                 }
                 else
                 {
-                    contains = 0;
+                      if (contains)
+                      {
+                        contains = 0;
+                      }
+                      else
+                      {
+                        curr_char--;
+                      }
+                    
                     pt_current = pt_length;
-                    curr_char--;
                 }
             }
             else
             {
+              if (contains)
+              {
                 contains = 0;
-                pt_current = pt_length;
+              }
+              else
+              {
                 curr_char--;
+              }
+              pt_current = pt_length;
             }
         }
-        if (contains && pt_current < 0)
+        if (contains && (pt_current < 0))
         {
             if (opt_color)
             {
@@ -113,12 +151,14 @@ int analyze_line(char str[], char * pattern, int opt_e, int opt_color)
             }
             else
             {
-                printf("%s", str);
+                str[str_length+1] = '\0';
+                printf("%s\n", str);
                 return 1;
             }
         }
     }
-    if (curr_startend-- > 0)
+    curr_startend--;
+    if (curr_startend >= 0)
     {
         for (size_t i = 0; i <= str_length; i++)
         {
@@ -129,12 +169,12 @@ int analyze_line(char str[], char * pattern, int opt_e, int opt_color)
                     printf(RESET);
                     curr_startend--;
                 }
-                if (i == starts[curr_startend])
+                if (curr_startend >= 0 && i == starts[curr_startend])
                 {
                     printf(COLOR);
                 }
             }
-            if (str[i] != '\n')
+            if (str_length > 0 && str[i] != '\n')
                 printf("%c", str[i]);
         }
         printf("\n");
@@ -151,7 +191,6 @@ int main(int argc, char * argv[])
     char * pattern;
     char * file_name;
 
-    char text[MAX_LENGTH] = "";
 
     int result = 1;
 
@@ -179,8 +218,9 @@ int main(int argc, char * argv[])
         char res[MAX_LENGTH];
         while (scanf("%c", &res[i]) > 0 && res[i] != EOF)
         {
-            if (res[i] == '\n' || res[i] == '\0')
+            if ((res[i] == '\n' || res[i] == '\0') && (res[0] != '\n' && res[0] != '\0') && i>0)
             {
+                
                 if (analyze_line(res, pattern, opt_e, opt_color))
                 {
                     result = 0;
@@ -195,19 +235,26 @@ int main(int argc, char * argv[])
     }
     else
     {
+        char text[MAX_LENGTH];
+
         FILE* f = fopen(file_name, "r");
-        fgets(text, MAX_LENGTH, f);
-        while (!feof(f))
+        if (f == NULL)
         {
-            if (analyze_line(text, pattern, opt_e, opt_color))
-            {
-                result = 0;
-            }
-            fgets(text, MAX_LENGTH, f);
-            
+          result = 1;
         }
-        
-        fclose(f);
+        else
+          {
+            while (fgets(text, MAX_LENGTH, f) != NULL)
+            {
+                if (text[0] != '\n' && text[0] != '\0')
+                    if (analyze_line(text, pattern, opt_e, opt_color))
+                    {
+                        result = 0;
+                    }
+            }
+           fclose(f);
+          }
+
     }
     return result;
 }
