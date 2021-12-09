@@ -2,15 +2,17 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <dirent.h>
+#include <string.h>
+#include <unistd.h>
 
 #define MAX_FILES 1000
 
 DIR* FD;
 struct dirent*  in_file;
 
-char    buffer[BUFSIZ];
 
 pthread_mutex_t mtx;
+pthread_mutex_t mtx2;
 
 char * folder;
 
@@ -22,30 +24,32 @@ int current_thread_number = 0;
 
 char * files[MAX_FILES];
 
+int total_num = 0;
+
 void *thread1(void *v)
 {
     pthread_mutex_lock(&mtx);
     int start_file = current_thread_number++;
     pthread_mutex_unlock(&mtx);
 
-    int local_chars[52];
+    int * local_chars = malloc(52 * sizeof(int));
+    char * local_buffer = malloc(BUFSIZ);
 
-    for (size_t i = start_file; i < files_number; i+th_number)
+    for (int i = start_file; i < files_number; i+=th_number)
     {
         FILE * entry_file = fopen(files[i], "r");
-
-        while (fgets(buffer, BUFSIZ, entry_file) != NULL)
+        while (fgets(local_buffer, BUFSIZ, entry_file) != NULL)
         {
             int i = 0;
-            while (buffer[i] != '\0')
+            while (local_buffer[i] != '\0')
             {
-                if (buffer[i] >= 'A' && buffer[i] <= 'Z')
+                if (local_buffer[i] >= 'A' && local_buffer[i] <= 'Z')
                 {
-                    local_chars[buffer[i] - 'A']++;
+                    local_chars[local_buffer[i] - 'A']++;
                 }
-                else if (buffer[i] >= 'a' && buffer[i] <= 'z')
+                else if (local_buffer[i] >= 'a' && local_buffer[i] <= 'z')
                 {
-                    local_chars[buffer[i] - 'a' + 26]++;
+                    local_chars[local_buffer[i] - 'a' + 26]++;
                 }
                 i++;
             }
@@ -53,14 +57,17 @@ void *thread1(void *v)
 
         fclose(entry_file);
     }
-    
-    pthread_mutex_lock(&mtx);
+    free(local_buffer);
+    free(local_chars);
+    pthread_mutex_lock(&mtx2);
     for (size_t i = 0; i < 52; i++)
     {
         chars[i] += local_chars[i];
     }
-    
-    pthread_mutex_unlock(&mtx);
+    total_num++;
+    pthread_mutex_unlock(&mtx2);
+
+    return 0;
 }   
 
 int main(int argc, char * argv[])
@@ -70,34 +77,36 @@ int main(int argc, char * argv[])
         fprintf(stderr, "Error : Failed to open input directory\n");
         return 1;
     }
-    folder = strcat(argv[1], "/"); 
-    
+
     files_number = atoi(argv[2]);
     th_number = atoi(argv[3]);
 
     int current_file = 0;
 
-    FILE*   entry_file;
-    if (argv[3] == 0)
+    folder = strcat(argv[1], "/"); 
+    printf("Thread number is: %d\n", th_number);
+    while ((in_file = readdir(FD)) && current_file < files_number) 
     {
-        while ((in_file = readdir(FD)) && current_file < files_number) 
-        {
+
             if (!strcmp (in_file->d_name, "."))
                 continue;
             if (!strcmp (in_file->d_name, ".."))    
                 continue;
-            char dir[100];
+            char * dir = malloc(100);
             strcpy(dir, folder);
-            
-            entry_file = fopen(strcat(dir, in_file->d_name), "r");
-            if (entry_file == NULL)
-            {
-                fprintf(stderr, "Error : Failed to open entry file\n");
-                fclose(entry_file);
-                return 1;
-            }
+            strcat(dir, in_file->d_name);
+            files[current_file] = dir;
+            current_file++;
+    }
 
+    if (th_number == 0)
+    {
+        printf("Starting sequental\n");
+        char buffer[BUFSIZ];
 
+        for (int i = 0; i < files_number; i++)
+        {
+            FILE * entry_file = fopen(files[i], "r");
             while (fgets(buffer, BUFSIZ, entry_file) != NULL)
             {
                 int i = 0;
@@ -116,47 +125,39 @@ int main(int argc, char * argv[])
             }
 
             fclose(entry_file);
-            current_file++;
         }
     }
     else
     {
-        while ((in_file = readdir(FD)) && current_file < files_number) 
-        {
-            if (!strcmp (in_file->d_name, "."))
-                continue;
-            if (!strcmp (in_file->d_name, ".."))    
-                continue;
-            strcpy(files[current_file], folder);
-            files[current_file] = strcat(files[current_file], in_file->d_name);
-            current_file++;
-        }
-
-
-        // pthread_t thrds[th_count];
-        // pthread_mutex_init(&mtx, NULL);
-
-        // for (size_t i = 0; i < th_count; i++)
-        // {
-        //     pthread_create(&thrds[i], NULL, thread1, NULL);
-        // }
+        printf("Running parallel\n");
         
+        pthread_t thrds[th_number];
+        pthread_mutex_init(&mtx, NULL);
+        pthread_mutex_init(&mtx2, NULL);
+        
+        for (int i = 0; i < th_number; i++)
+        {
+            printf("Spawning thread %d\n", i);
+            pthread_create(&thrds[i], NULL, thread1, NULL);
+        }
     }
     
-    // for (int i = 0; i < 26; i++)
-    // {
-    //     printf("%c: %d\n", i + 'A', chars[i]);
-    // }
-    // for (int i = 0; i < 26; i++)
-    // {
-    //     printf("%c: %d\n", i + 'a', chars[i+26]);
-    // }
-    
-    for (size_t i = 0; i < files_number; i++)
+    while (total_num != th_number) {}
+
+    printf("Printing LFT\n\n");
+    for (int i = 0; i < 26; i++)
     {
-        printf("%s\n", files[i]);
+        printf("%c: %d\n", i + 'A', chars[i]);
+    }
+    for (int i = 0; i < 26; i++)
+    {
+        printf("%c: %d\n", i + 'a', chars[i+26]);
     }
     
+    for (int i = 0; i < files_number; i++)
+    {
+        free(files[i]);
+    }
 
     return 0;
 }

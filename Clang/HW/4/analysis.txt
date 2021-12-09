@@ -1,0 +1,5 @@
+Optimal number of threads is: 2
+TIME:
+0.000000
+0.150000
+0.000000
