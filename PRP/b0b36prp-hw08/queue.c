@@ -1,20 +1,11 @@
-#ifndef __QUEUE_H__
-#define __QUEUE_H__
- 
+#include "queue.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
  
 #define MIN_SIZE 1
-/* Queue structure which holds all necessary data */
-typedef struct {
-    int size;
-    int act_size;
-    void ** data;
-
-    int head;
-    int tail;
-} queue_t;
 
 queue_t * create_queue(int capacity)
 {
@@ -33,17 +24,28 @@ void delete_queue(queue_t *queue)
     free(queue->data);
     free(queue);
 }
+
 /* 
  * inserts a reference to the element into the queue
  * returns: true on success; false otherwise
  */
 bool push_to_queue(queue_t *queue, void *data)
 {
-    if ((queue->tail == queue->head) && (queue->act_size != 0))
-        return false;
-    
+    if ((queue->tail == queue->head) && (queue->act_size != 0) && ((queue->act_size == queue->size)))
+    {
+        void ** tmp = malloc(queue->size * sizeof(void *) * 2);
+        for (int i = 0; i < queue->act_size; i++)
+        {
+            tmp[i] = queue->data[queue->head + i >= queue->size ? queue->head + i - queue->size : queue->head + i];
+        }
+        free(queue->data);
+        queue->data = tmp;
+
+        queue->size *= 2;
+        queue->head = 0;
+        queue->tail = queue->act_size;
+    }
     queue->data[(queue->tail)++] = data;
-    
     if (queue->tail == queue->size)
         queue->tail = 0;
 
@@ -61,10 +63,23 @@ void* pop_from_queue(queue_t *queue)
         void * res = NULL;
         return res;
     }
+    if (queue->act_size < queue->size / 2 && queue->size / 2 > MIN_SIZE)
+    {
+        void ** tmp = malloc(queue->size * sizeof(void *) / 2);
+        for (int i = 0; i < queue->act_size; i++)
+        {
+            tmp[i] = queue->data[queue->head + i >= queue->size ? queue->head + i - queue->size : queue->head + i];
+        }
+        free(queue->data);
+        queue->data = tmp;
+
+        queue->size /= 2;
+        queue->head = 0;
+        queue->tail = queue->act_size;
+    }
     void * result = queue->data[queue->head];
     if (++(queue->head) == queue->size)
         queue->head = 0;
-    
     queue->act_size--;
     return result;
 }
@@ -82,31 +97,6 @@ void* get_from_queue(queue_t *queue, int idx)
     return queue->data[queue->head + idx];
 }
 
-queue_t * check_size(queue_t * queue, bool add)
-{
-    queue_t * new_q;
-    if ((queue->act_size == queue->size) && add)
-    {
-        new_q = create_queue(queue->size * 2);
-    }
-    else if ((queue->act_size < (queue->size / 2)) && (!add) && ((queue->size / 2) > MIN_SIZE))
-    {
-        new_q = create_queue(queue->size / 2);
-    }
-    else
-    {
-        return queue;
-    }
-    while (queue->act_size != 0)
-    {
-        void * tmp = pop_from_queue(queue);
-        printf("%d\n", tmp);
-        push_to_queue(new_q, tmp);
-    }
-    delete_queue(queue);
-    
-    return new_q;
-}
 
 /* gets number of stored elements */
 int get_queue_size(queue_t *queue)
@@ -114,4 +104,3 @@ int get_queue_size(queue_t *queue)
     return queue->act_size;
 
 }
-#endif /* __QUEUE_H__ */

@@ -3,7 +3,6 @@
 #include "string.h"
 
 #include "queue.h"
-
 /* allocate new integer with value a and add it to the queue */
 void add(int a, queue_t *queue)
 {
@@ -51,7 +50,7 @@ int main(int argc, char *argv[])
    queue_t *queue;
 
    // read the size of the queue
-   scanf("%d", &n);
+   if (scanf("%d", &n) == 0){}
    // create queue
    queue = create_queue(n);
 
