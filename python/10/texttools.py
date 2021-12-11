@@ -7,8 +7,19 @@ def count_rows_and_words(filename):
 
     return (len(lines), sum)
 
-
+def compute_word_frequencies(filename):
+    words = {}
+    with open(filename, "r+", encoding='utf-8') as f:
+        lines = f.readlines()
+        for i in range(len(lines)):
+            words_tmp = lines[i].split()
+            for j in range(len(words_tmp)):
+                if (words_tmp[j] in words.keys()):
+                    words[words_tmp[j]] += 1
+                else: 
+                    words[words_tmp[j]] = 1
+    return words
 
 if __name__ == "__main__":
     filename = input()
-    print(count_rows_and_words(filename))
+    print(compute_word_frequencies(filename))
