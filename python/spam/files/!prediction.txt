@@ -1,0 +1,4 @@
+dad.txt OK
+ddaw!txt SPAM
+ddd.txt OK
+ki.txt SPAM
