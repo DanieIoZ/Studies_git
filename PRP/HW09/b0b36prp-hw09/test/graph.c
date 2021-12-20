@@ -37,27 +37,41 @@ graph_t * increase_size(graph_t * graph)
 // - function -----------------------------------------------------------------
 void load_txt(const char *fname, graph_t *graph)
 {
-   int exit = 0;
    FILE * f = fopen(fname, "r");
-   while (f && !exit) 
+   int reading = 1;
+   while (f && reading)
    {
       if (graph->num_pts == graph->size) 
       {
          increase_size(graph);
       }
-      while (graph->num_pts < graph->size) 
+      int cur_num = 0;
+      int reads = 0;
+      char buff[20];
+      int nums[3];
+      while ((graph->num_pts < graph->size)) 
       {
-         if (fscanf(f, "%d %d %d\n", &(graph->pts[graph->num_pts].pt1), &(graph->pts[graph->num_pts].pt2), &(graph->pts[graph->num_pts].cost)) == 3) 
+         while ((buff[reads] = getc(f)) >= '0' && buff[reads] <= '9')
          {
-            graph->num_pts += 1;
-         } 
-         else 
+            reads++;
+         }
+         nums[cur_num] = atoi(buff);
+         cur_num++;
+         reads = 0;
+         if (cur_num > 2)
          {
-            exit = 1; /* neco je spatne ukoncujeme naciteni */
+            graph->pts[graph->num_pts].pt1 = nums[0];
+            graph->pts[graph->num_pts].pt2 = nums[1];
+            graph->pts[graph->num_pts].cost = nums[2];
+            cur_num = 0;
+            graph->num_pts++;
+         }
+         if (feof(f))
+         {
+            reading = 0;
             break;
          }
       }
-      
    }
    if (f) 
    {
@@ -69,7 +83,8 @@ void load_txt(const char *fname, graph_t *graph)
 void load_bin(const char *fname, graph_t *graph)
 {
    FILE * f = fopen(fname, "rb");
-   while (f && !feof(f)) 
+   int reading = 1;
+   while (f && !feof(f) && reading) 
    {
       if (graph->num_pts == graph->size) 
       {
@@ -77,9 +92,16 @@ void load_bin(const char *fname, graph_t *graph)
       }
       while (graph->num_pts < graph->size) 
       {
-         fread(&(graph->pts[graph->num_pts].pt1), BIN_BUFFER, 1, f);
-         fread(&(graph->pts[graph->num_pts].pt2), BIN_BUFFER, 1, f);
-         fread(&(graph->pts[graph->num_pts].cost), BIN_BUFFER, 1, f);
+         int reads = 0;
+         reads += fread(&(graph->pts[graph->num_pts].pt1), BIN_BUFFER, 1, f);
+         reads += fread(&(graph->pts[graph->num_pts].pt2), BIN_BUFFER, 1, f);
+         reads += fread(&(graph->pts[graph->num_pts].cost), BIN_BUFFER, 1, f);
+
+         if (reads < 3)
+         {
+            reading = 0;
+            break;
+         }
          graph->num_pts++;
       }
    }
