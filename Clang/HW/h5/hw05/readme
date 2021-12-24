@@ -1,0 +1,1 @@
+by default "sender" reads "data.txt" file, but also can accept another filename as argv

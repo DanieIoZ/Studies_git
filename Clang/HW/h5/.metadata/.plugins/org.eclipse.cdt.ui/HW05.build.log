@@ -1,0 +1,68 @@
+21:08:10 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 1000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:642:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:652:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:691:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:701:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70796	   2644	   3800	  77240	  12db8	HW05.elf
+ 
+
+21:08:10 Build Finished (took 760ms)
+
