@@ -3518,3 +3518,933 @@ arm-none-eabi-size "HW05.elf"
    text	   data	    bss	    dec	    hex	filename
   70796	   2644	   3800	  77240	  12db8	HW05.elf
  
+14:39:58 **** Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 100000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:644:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:654:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:693:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:703:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70852	   2644	   3800	  77296	  12df0	HW05.elf
+ 
+14:42:29 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 100000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:645:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:655:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:694:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:704:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70812	   2644	   3800	  77256	  12dc8	HW05.elf
+ 
+14:45:02 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 1000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:647:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:657:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:696:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:706:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70844	   2644	   3800	  77288	  12de8	HW05.elf
+ 
+14:46:28 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 1000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:647:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:657:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:696:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:706:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70836	   2644	   3800	  77280	  12de0	HW05.elf
+ 
+14:47:36 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 1000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:647:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:657:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:696:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:706:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70836	   2644	   3800	  77280	  12de0	HW05.elf
+ 
+14:51:00 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+make: Цель «all» не требует выполнения команд.
+14:52:15 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+make: Цель «all» не требует выполнения команд.
+14:53:46 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+make: Цель «all» не требует выполнения команд.
+14:56:41 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+make: Цель «all» не требует выполнения команд.
+14:57:19 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 1000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:646:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:656:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:695:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:705:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70820	   2644	   3800	  77264	  12dd0	HW05.elf
+ 
+14:59:55 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 1000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:622:37: warning: operation on 'i' may be undefined [-Wsequence-point]
+                 coms[i] = tmp_coms[i++];
+                                    ~^~
+../src/main.c:649:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:659:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:698:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:708:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70708	   2644	   3800	  77152	  12d60	HW05.elf
+ 
+15:01:47 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 1000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:650:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:660:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:699:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:709:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70684	   2644	   3800	  77128	  12d48	HW05.elf
+ 
+15:02:53 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 1000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:626:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+               HAL_UART_Transmit( &hUART2, "COP", sizeof("COP"), 0xFFFF);
+                                           ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:647:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~~
+../src/main.c:651:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:661:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:700:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:710:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70700	   2644	   3800	  77144	  12d58	HW05.elf
+ 
+15:03:54 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 1000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:626:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+               HAL_UART_Transmit( &hUART2, "COP", sizeof("COP"), 0xFFFF);
+                                           ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:647:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~~
+../src/main.c:651:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:661:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:700:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:710:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70700	   2644	   3800	  77144	  12d58	HW05.elf
+ 
+15:04:56 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 1000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:627:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+               HAL_UART_Transmit( &hUART2, "COP", sizeof("COP"), 0xFFFF);
+                                           ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:647:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~~
+../src/main.c:652:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:662:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:701:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:711:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70716	   2644	   3800	  77160	  12d68	HW05.elf
+ 
+15:05:37 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 1000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:616:42: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+               HAL_UART_Transmit(&hUART2, chArr, 1,10);
+                                          ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:647:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~~
+../src/main.c:627:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+               HAL_UART_Transmit( &hUART2, "COP", sizeof("COP"), 0xFFFF);
+                                           ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:647:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~~
+../src/main.c:652:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:662:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:701:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:711:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70716	   2644	   3800	  77160	  12d68	HW05.elf
+ 
+15:07:02 **** Incremental Build of configuration Debug for project HW05 ****
+make -j8 all 
+Building file: ../src/main.c
+Invoking: MCU GCC Compiler
+/home/d/Studies/Clang/HW/h5/HW05/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DNUCLEO_F446RE -DSTM32F4 -DSTM32F446RETx -DSTM32 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -I"/home/d/Studies/Clang/HW/h5/HW05/inc" -I"/home/d/Studies/Clang/HW/h5/HW05/lib" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/core" -I"/home/d/Studies/Clang/HW/h5/HW05/CMSIS/device" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/Legacy" -I"/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc" -I"/home/d/Studies/Clang/HW/h5/HW05/Utilities/STM32F4xx-Nucleo" -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:528:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+../src/main.c: In function 'main':
+../src/main.c:601:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+         oRecvStatus = HAL_UART_Receive( &hUART2, chArr, 1, 1000 );
+                                                  ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:648:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+../src/main.c:616:42: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+               HAL_UART_Transmit(&hUART2, chArr, 1,10);
+                                          ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:647:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~~
+../src/main.c:622:43: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+               HAL_UART_Transmit( &hUART2, "COP", sizeof("COP"), 0xFFFF);
+                                           ^~~~~
+In file included from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_conf.h:357:0,
+                 from /home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from /home/d/Studies/Clang/HW/h5/HW05/CMSIS/device/stm32f4xx.h:232,
+                 from ../src/main.c:15:
+/home/d/Studies/Clang/HW/h5/HW05/HAL_Driver/Inc/stm32f4xx_hal_uart.h:647:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~~
+../src/main.c:653:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:663:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:702:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:CIRCLE %d,%d,%d", &data[0], &data[1], &data[2] );
+               ^~~
+../src/main.c:712:15: warning: unused variable 'rec' [-Wunused-variable]
+           int rec = sscanf( coms, "DRAW:LINE %d,%d,%d,%d", &data[0], &data[1], &data[2], &data[3] );
+               ^~~
+../src/main.c:543:14: warning: variable 'uiSerRecv' set but not used [-Wunused-but-set-variable]
+     uint32_t uiSerRecv;
+              ^~~~~~~~~
+../src/main.c:533:27: warning: variable 'uiDispCentY' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+                           ^~~~~~~~~~~
+../src/main.c:533:14: warning: variable 'uiDispCentX' set but not used [-Wunused-but-set-variable]
+     uint32_t uiDispCentX, uiDispCentY;
+              ^~~~~~~~~~~
+../src/main.c:531:23: warning: variable 'uiSec' set but not used [-Wunused-but-set-variable]
+     uint32_t uiTicks, uiSec;
+                       ^~~~~
+../src/main.c:531:14: warning: unused variable 'uiTicks' [-Wunused-variable]
+     uint32_t uiTicks, uiSec;
+              ^~~~~~~
+At top level:
+../src/main.c:287:21: warning: 'TFT_ShieldDetect' defined but not used [-Wunused-function]
+ static ShieldStatus TFT_ShieldDetect(void)
+                     ^~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: HW05.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/d/Studies/Clang/HW/h5/HW05/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "HW05.elf" @"objects.list"   -lm
+Finished building target: HW05.elf
+ 
+make --no-print-directory post-build
+Generating binary and Printing size information:
+arm-none-eabi-objcopy -O binary "HW05.elf" "HW05.bin"
+arm-none-eabi-size "HW05.elf"
+   text	   data	    bss	    dec	    hex	filename
+  70716	   2644	   3800	  77160	  12d68	HW05.elf
+ 

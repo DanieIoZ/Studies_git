@@ -613,13 +613,22 @@ void main(void)
               }
               else
                 tmp_coms[idx++] = chArr[0];
+              HAL_UART_Transmit(&hUART2, chArr, 1,10);
             }
             if (chArr[0] == ';')
             {
               idx = 0;
-              strcpy(coms, tmp_coms);
+              int i = 0;
+              while (tmp_coms[i] != ';')
+              {
+            	  coms[i] = tmp_coms[i];
+            	  i += 1;
+              }
+              coms[i] = ';';
               received_com = 1;
             }
+              
+
             uiSerRecv = chArr[0];
             // do sth with received data
         }

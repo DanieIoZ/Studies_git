@@ -149,6 +149,7 @@ void *mainthread(void *v)
 				int n_written = write(hSerial, sending, 1);
 				usleep(40000);
 			}
+			printf("SENT: %s\n", message);
 			from_file = 0;
 		}
     }
