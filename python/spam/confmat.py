@@ -13,7 +13,7 @@ class BinaryConfusionMatrix:
     def check_value_of(self, value):
         if value not in (self.pos_tag, self.neg_tag):
             raise ValueError('The parameters must be %s or %s' \
-                % (self.pos_tag, self.neg_tag))
+                             % (self.pos_tag, self.neg_tag))
 
     def compute_from_dicts(self, truth_dict, pred_dict):
         for key in truth_dict:

@@ -1,5 +1,6 @@
 import os
 
+
 class Corpus:
     def __init__(self, directory):
         self.dir = directory
@@ -9,7 +10,5 @@ class Corpus:
             if name[0] == "!":
                 continue 
             with open(self.dir + "/" + name, "r", encoding="utf-8") as f:
-                str = ""
-                str = f.read()
-                yield [name, str]
-        
+                email_body = f.read()
+                yield [name, email_body]
